@@ -77,7 +77,7 @@ on:
 
 env:
   TZ: America/New_York
-  IMAGEBUILDER_SH: openwrt-armvirt
+  IMAGEBUILDER_SH: router-config/openwrt-imagebuilder/imagebuilder.sh
 
 jobs:
   build:
@@ -137,7 +137,7 @@ jobs:
         uses: ncipollo/release-action@main
         if: ${{ env.PACKAGED_STATUS }} == 'success' && !cancelled()
         with:
-          tag: OpenWrt_Aml_imagebuilder_${{ env.RELEASES_BRANCH }}_${{ env.PACKAGED_OUTPUTDATE }}
+          tag: OpenWrt AKARI AX-512_${{ env.RELEASES_BRANCH }}_${{ env.PACKAGED_OUTPUTDATE }}
           artifacts: ${{ env.PACKAGED_OUTPUTPATH }}/*
           allowUpdates: true
           token: ${{ secrets.GH_TOKEN }}
