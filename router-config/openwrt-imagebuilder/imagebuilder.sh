@@ -76,6 +76,12 @@ download_imagebuilder() {
 # Adjust related files in the ImageBuilder directory
 adjust_settings() {
     cd ${imagebuilder_path}
+    wget -P /etc/uci-defaults https://raw.githubusercontent.com/kzer00/repo/main/aarch64_cortex-a53/30_interfaces.sh
+    wget -P /etc/uci-defaults https://raw.githubusercontent.com/kzer00/repo/main/aarch64_cortex-a53/90_wifi.sh
+    wget -P /www/luci-static/resources/view/status/include https://raw.githubusercontent.com/kzer00/repo/main/aarch64_cortex-a53/29_port.js
+    wget -P /usr/share/rpcd/acl.d https://raw.githubusercontent.com/kzer00/repo/main/aarch64_cortex-a53/luci-mod-status-index.json
+    echo "src/gz custom_repo https://raw.githubusercontent.com/kzer00/repo/main/aarch64_cortex-a53" >> repositories.conf
+    sed -i 's/option check_signature/# option check_signature/g' repositories.conf
     echo -e "${STEPS} Start adjusting .config file settings..."
 
     # For .config file
@@ -149,8 +155,8 @@ rebuild_firmware() {
         luci-proto-3g luci-proto-ncm  \
         luci-proto-wireguard luci-proto-qmi usb-modeswitch luci-app-ttyd \
         kmod-usb-net-rndis -dnsmasq dnsmasq-full \
-        openssh-sftp-server \
-        \
+        openssh-sftp-server luci-app-tinyfm luci-app-oc-editor \
+        luci-theme-neobirdkawe xmm-modem \
         ${config_list} \
         "
 
