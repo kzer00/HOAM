@@ -76,9 +76,12 @@ download_imagebuilder() {
 # Adjust related files in the ImageBuilder directory
 adjust_settings() {
     cd ${imagebuilder_path}
-    wget -P /etc/uci-defaults https://raw.githubusercontent.com/kzer00/repo/main/aarch64_cortex-a53/30_interfaces.sh
+    mkdir etc/uci-defaults
+    cd ${imagebuilder_path}
+    mkdir usr/share/rpcd/acl.d
+    wget -P etc/uci-defaults https://raw.githubusercontent.com/kzer00/repo/main/aarch64_cortex-a53/30_interfaces.sh
     #wget -P /etc/uci-defaults https://raw.githubusercontent.com/kzer00/repo/main/aarch64_cortex-a53/90_wifi.sh
-    wget -P /www/luci-static/resources/view/status/include https://raw.githubusercontent.com/kzer00/repo/main/aarch64_cortex-a53/29_port.js
+    wget -P www/luci-static/resources/view/status/include https://raw.githubusercontent.com/kzer00/repo/main/aarch64_cortex-a53/29_port.js
     wget -q https://raw.githubusercontent.com/kzer00/repo/main/aarch64_cortex-a53/luci-mod-status-index.json -O /usr/share/rpcd/acl.d/luci-mod-status-index.json
     echo "src/gz custom_repo https://raw.githubusercontent.com/kzer00/repo/main/aarch64_cortex-a53" >> repositories.conf
     sed -i 's/option check_signature/# option check_signature/g' repositories.conf
