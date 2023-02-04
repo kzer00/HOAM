@@ -77,7 +77,7 @@ download_imagebuilder() {
 adjust_settings() {
     cd ${imagebuilder_path}
     wget -P /etc/uci-defaults https://raw.githubusercontent.com/kzer00/repo/main/aarch64_cortex-a53/30_interfaces.sh
-    wget -P /etc/uci-defaults https://raw.githubusercontent.com/kzer00/repo/main/aarch64_cortex-a53/90_wifi.sh
+    #wget -P /etc/uci-defaults https://raw.githubusercontent.com/kzer00/repo/main/aarch64_cortex-a53/90_wifi.sh
     wget -P /www/luci-static/resources/view/status/include https://raw.githubusercontent.com/kzer00/repo/main/aarch64_cortex-a53/29_port.js
     wget -P /usr/share/rpcd/acl.d https://raw.githubusercontent.com/kzer00/repo/main/aarch64_cortex-a53/luci-mod-status-index.json
     echo "src/gz custom_repo https://raw.githubusercontent.com/kzer00/repo/main/aarch64_cortex-a53" >> repositories.conf
