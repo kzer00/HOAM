@@ -231,7 +231,7 @@ download_depends() {
     cd ${make_path}
     echo -e "${STEPS} Start downloading dependency files..."
 
-    # Download /boot related files
+    # Download /boot related filesrootfs/www/luci-static/resources/view/status/include
     if [[ -d "${bootfs_path}" ]]; then
         svn up ${bootfs_path} --force
     else
@@ -517,10 +517,12 @@ refactor_files() {
         sed -i "s|option sw_flow.*|option sw_flow '0'|g" etc/config/turboacc
     }
 
-    # Add balethirq
+    # Add balethirq,luci-mod-status,and set interfcaes
     balethirq_file="${common_files}/rootfs/usr/sbin/balethirq.pl"
     [[ -x "${balethirq_file}" ]] && sed -i "/^exit 0/i\/usr/sbin/balethirq.pl" etc/rc.local
-
+    mod_status1="${common_files}/rootfs/usr/share/rpcd/acl.d/luci-mod-status-index.json"
+    mod_status2="${common_files}/rootfs/www/luci-static/resources/view/status/include/29_port.js"
+    mod_interfaces="${common_files}/rootfs/etc/uci-defaults/30_interfaces"
     # Modify the cpu mode to schedutil
     [[ -f "etc/config/cpufreq" ]] && sed -i "s/ondemand/schedutil/" etc/config/cpufreq
 
@@ -566,13 +568,6 @@ refactor_files() {
 
     # Add blacklist
     mkdir boot 
-    mkdir -p etc/uci-defaults
-    mkdir -p usr/share/rpcd/acl.d
-    mkdir -p etc/modprobe.d
-    mkdir -p www/luci-static/resources/view/status/include
-    wget -P etc/uci-defaults https://raw.githubusercontent.com/kzer00/repo/main/aarch64_cortex-a53/30_interfaces.sh
-    wget -P www/luci-static/resources/view/status/include https://raw.githubusercontent.com/kzer00/repo/main/aarch64_cortex-a53/29_port.js
-    wget -q https://raw.githubusercontent.com/kzer00/repo/main/aarch64_cortex-a53/luci-mod-status-index.json -O usr/share/rpcd/acl.d/luci-mod-status-index.json
     cat >etc/modprobe.d/99-local.conf <<EOF
 blacklist snd_soc_meson_aiu_i2s
 alias brnf br_netfilter
