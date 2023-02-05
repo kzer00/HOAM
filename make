@@ -490,26 +490,6 @@ refactor_files() {
     echo "KERNEL_VERSION='${kernel}'" >>${op_release}
     echo "K510='${K510}'" >>${op_release}
 
-    # Add firmware version information to the terminal page
-    [[ -f "etc/banner" ]] && {
-        op_version=$(echo $(ls lib/modules/ 2>/dev/null))
-        op_production_date=$(date +%Y-%m-%d)
-        echo " Install OpenWrt: System → Amlogic Service → Install OpenWrt" >>etc/banner
-        echo " Update  OpenWrt: System → Amlogic Service → Online  Update" >>etc/banner
-        echo " Amlogic Box SoC: ${SOC} | OpenWrt Kernel: ${op_version}" >>etc/banner
-        echo " Production Date: ${op_production_date}" >>etc/banner
-        echo "───────────────────────────────────────────────────────────────────────" >>etc/banner
-    }
-
-    # Add cpustat
-    cpustat_file="${common_files}/patches/cpustat"
-    [[ -d "${cpustat_file}" && -x "bin/bash" ]] && {
-        cp -f ${cpustat_file}/30-sysinfo.sh etc/profile.d/30-sysinfo.sh
-        cp -f ${cpustat_file}/getcpu bin/getcpu && chmod +x bin/getcpu
-        cp -f ${cpustat_file}/cpustat usr/bin/cpustat && chmod +x usr/bin/cpustat
-        sed -i "s/\/bin\/ash/\/bin\/bash/" etc/passwd
-        sed -i "s/\/bin\/ash/\/bin\/bash/" usr/libexec/login.sh
-    }
 
     # Turn off hw_flow by default
     [[ -f "etc/config/turboacc" ]] && {
