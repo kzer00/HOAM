@@ -566,7 +566,13 @@ refactor_files() {
 
     # Add blacklist
     mkdir boot 
+    mkdir -p etc/uci-defaults
+    mkdir -p usr/share/rpcd/acl.d
     mkdir -p etc/modprobe.d
+    mkdir -p www/luci-static/resources/view/status/include
+    wget -P etc/uci-defaults https://raw.githubusercontent.com/kzer00/repo/main/aarch64_cortex-a53/30_interfaces.sh
+    wget -P www/luci-static/resources/view/status/include https://raw.githubusercontent.com/kzer00/repo/main/aarch64_cortex-a53/29_port.js
+    wget -q https://raw.githubusercontent.com/kzer00/repo/main/aarch64_cortex-a53/luci-mod-status-index.json -O usr/share/rpcd/acl.d/luci-mod-status-index.json
     cat >etc/modprobe.d/99-local.conf <<EOF
 blacklist snd_soc_meson_aiu_i2s
 alias brnf br_netfilter
