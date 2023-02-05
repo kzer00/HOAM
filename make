@@ -69,7 +69,7 @@ firmware_repo="${firmware_repo//tree\/main/trunk}"
 # Install/Update script files download repository
 #script_repo="https://github.com/ophub/luci-app-amlogic/tree/main/luci-app-amlogic/root/usr/sbin"
 # Convert script library address to svn format
-#cript_repo="${script_repo//tree\/main/trunk}"
+#script_repo="${script_repo//tree\/main/trunk}"
 
 # Kernel files download repository
 kernel_repo="https://github.com/kzer00/k3rnel/tree/main/pub"
@@ -260,7 +260,8 @@ download_depends() {
     svn export ${depends_repo}/armbian-files/common-files/etc/balance_irq ${common_files}/rootfs/etc --force
 
     # Download install/update and other related files
-    svn export ${script_repo} ${common_files}/rootfs/usr/sbin --force
+    svn export ${common_files}/rootfs/usr/sbin --force
+    svn export ${common_files}/rootfs/etc --force
     chmod +x ${common_files}/rootfs/usr/sbin/*
 }
 
