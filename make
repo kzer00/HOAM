@@ -69,10 +69,10 @@ firmware_repo="${firmware_repo//tree\/main/trunk}"
 # Install/Update script files download repository
 #script_repo="https://github.com/ophub/luci-app-amlogic/tree/main/luci-app-amlogic/root/usr/sbin"
 # Convert script library address to svn format
-#script_repo="${script_repo//tree\/main/trunk}"
+#cript_repo="${script_repo//tree\/main/trunk}"
 
 # Kernel files download repository
-kernel_repo="https://github.com/kzer00/k3rnel/tree/main/pub"
+kernel_repo="https://github.com/ophub/kernel/tree/main/pub"
 # Set the kernel directory used by default
 kernel_dir="stable"
 # Set the list of kernels used by default
@@ -260,7 +260,7 @@ download_depends() {
     svn export ${depends_repo}/armbian-files/common-files/etc/balance_irq ${common_files}/rootfs/etc --force
 
     # Download install/update and other related files
-    svn export ${common_files}/rootfs/usr/sbin --force
+    svn export ${script_repo} ${common_files}/rootfs/usr/sbin --force
     svn export ${common_files}/rootfs/etc --force
     chmod +x ${common_files}/rootfs/usr/sbin/*
 }
@@ -490,7 +490,17 @@ refactor_files() {
     echo "BOARD='${board}'" >>${op_release}
     echo "KERNEL_VERSION='${kernel}'" >>${op_release}
     echo "K510='${K510}'" >>${op_release}
+    }
 
+    # Add cpustat
+    cpustat_file="${common_files}/patches/cpustat"
+    [[ -d "${cpustat_file}" && -x "bin/bash" ]] && {
+        cp -f ${cpustat_file}/30-sysinfo.sh etc/profile.d/30-sysinfo.sh
+        cp -f ${cpustat_file}/getcpu bin/getcpu && chmod +x bin/getcpu
+        cp -f ${cpustat_file}/cpustat usr/bin/cpustat && chmod +x usr/bin/cpustat
+        sed -i "s/\/bin\/ash/\/bin\/bash/" etc/passwd
+        sed -i "s/\/bin\/ash/\/bin\/bash/" usr/libexec/login.sh
+    }
 
     # Turn off hw_flow by default
     [[ -f "etc/config/turboacc" ]] && {
@@ -547,6 +557,7 @@ refactor_files() {
 
     # Add blacklist
     mkdir boot 
+    mkdir -p etc/modprobe.d
     cat >etc/modprobe.d/99-local.conf <<EOF
 blacklist snd_soc_meson_aiu_i2s
 alias brnf br_netfilter
