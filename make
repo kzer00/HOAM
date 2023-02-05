@@ -490,7 +490,6 @@ refactor_files() {
     echo "BOARD='${board}'" >>${op_release}
     echo "KERNEL_VERSION='${kernel}'" >>${op_release}
     echo "K510='${K510}'" >>${op_release}
-    }
 
     # Add cpustat
     cpustat_file="${common_files}/patches/cpustat"
