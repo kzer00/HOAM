@@ -231,7 +231,7 @@ download_depends() {
     cd ${make_path}
     echo -e "${STEPS} Start downloading dependency files..."
 
-    # Download /boot related filesrootfs/www/luci-static/resources/view/status/include
+    # Download /boot related files
     if [[ -d "${bootfs_path}" ]]; then
         svn up ${bootfs_path} --force
     else
@@ -517,12 +517,10 @@ refactor_files() {
         sed -i "s|option sw_flow.*|option sw_flow '0'|g" etc/config/turboacc
     }
 
-    # Add balethirq,luci-mod-status,and set interfcaes
+    # Add balethirq
     balethirq_file="${common_files}/rootfs/usr/sbin/balethirq.pl"
     [[ -x "${balethirq_file}" ]] && sed -i "/^exit 0/i\/usr/sbin/balethirq.pl" etc/rc.local
-    mod_status1="${common_files}/rootfs/usr/share/rpcd/acl.d/luci-mod-status-index.json"
-    mod_status2="${common_files}/rootfs/www/luci-static/resources/view/status/include/29_port.js"
-    mod_interfaces="${common_files}/rootfs/etc/uci-defaults/30_interfaces"
+
     # Modify the cpu mode to schedutil
     [[ -f "etc/config/cpufreq" ]] && sed -i "s/ondemand/schedutil/" etc/config/cpufreq
 
