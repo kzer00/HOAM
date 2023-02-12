@@ -159,7 +159,7 @@ rebuild_firmware() {
         luci-proto-3g luci-proto-ncm  \
         luci-proto-wireguard luci-proto-qmi usb-modeswitch luci-app-ttyd \
         kmod-usb-net-rndis -dnsmasq dnsmasq-full \
-        openssh-sftp-server luci-app-openclash luci-app-passwall \
+        openssh-sftp-server luci-app-openclash \
         luci-theme-neobirdkawe xmm-modem luci-app-modeminfo luci-app-atinout-mod \
         ${config_list} \
         "
