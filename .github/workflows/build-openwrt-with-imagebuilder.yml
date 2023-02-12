@@ -52,7 +52,7 @@ on:
       kernel_repo:
         description: "Set the kernel repository"
         required: false
-        default: "https://github.com/kzer00/k3rnel/tree/main/pub"
+        default: "https://github.com/cuangky/trunk/kernel"
       openwrt_size:
         description: "Set the rootfs size(Unit: MiB)"
         required: false
