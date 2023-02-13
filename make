@@ -1,6 +1,43 @@
 #!/bin/bash
 #============================================================================
-
+#
+# This file is licensed under the terms of the GNU General Public
+# License version 2. This program is licensed "as is" without any
+# warranty of any kind, whether express or implied.
+#
+# This file is a part of the make OpenWrt for Amlogic s9xxx tv box
+# https://github.com/ophub/amlogic-s9xxx-openwrt
+#
+# Description: Automatically Packaged OpenWrt for Amlogic s9xxx tv box
+# Copyright (C) 2020- https://github.com/unifreq
+# Copyright (C) 2020- https://github.com/ophub/amlogic-s9xxx-openwrt
+#
+# Command: sudo ./make
+# Command optional parameters please refer to the source code repository
+#
+#============================== Functions list ==============================
+#
+# error_msg          : Output error message
+# process_msg        : Output process message
+# get_textoffset     : Get kernel TEXT_OFFSET
+#
+# init_var           : Initialize all variables
+# find_openwrt       : Find OpenWrt file (openwrt-armvirt/*rootfs.tar.gz)
+# download_depends   : Download the dependency files
+# query_version      : Query the latest kernel version
+# download_kernel    : Download the latest kernel
+#
+# confirm_version    : Confirm version type
+# make_image         : Making OpenWrt file
+# extract_openwrt    : Extract OpenWrt files
+# replace_kernel     : Replace the kernel
+# refactor_files     : Refactor related files
+# clean_tmp          : Clear temporary files
+#
+# loop_make          : Loop to make OpenWrt files
+#
+#====================== Set make environment variables ======================
+#
 # Related file storage path
 make_path="${PWD}"
 tmp_path="${make_path}/tmp"
