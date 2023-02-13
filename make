@@ -1,43 +1,6 @@
 #!/bin/bash
 #============================================================================
-#
-# This file is licensed under the terms of the GNU General Public
-# License version 2. This program is licensed "as is" without any
-# warranty of any kind, whether express or implied.
-#
-# This file is a part of the make OpenWrt for Amlogic s9xxx tv box
-# https://github.com/ophub/amlogic-s9xxx-openwrt
-#
-# Description: Automatically Packaged OpenWrt for Amlogic s9xxx tv box
-# Copyright (C) 2020- https://github.com/unifreq
-# Copyright (C) 2020- https://github.com/ophub/amlogic-s9xxx-openwrt
-#
-# Command: sudo ./make
-# Command optional parameters please refer to the source code repository
-#
-#============================== Functions list ==============================
-#
-# error_msg          : Output error message
-# process_msg        : Output process message
-# get_textoffset     : Get kernel TEXT_OFFSET
-#
-# init_var           : Initialize all variables
-# find_openwrt       : Find OpenWrt file (openwrt-armvirt/*rootfs.tar.gz)
-# download_depends   : Download the dependency files
-# query_version      : Query the latest kernel version
-# download_kernel    : Download the latest kernel
-#
-# confirm_version    : Confirm version type
-# make_image         : Making OpenWrt file
-# extract_openwrt    : Extract OpenWrt files
-# replace_kernel     : Replace the kernel
-# refactor_files     : Refactor related files
-# clean_tmp          : Clear temporary files
-#
-# loop_make          : Loop to make OpenWrt files
-#
-#====================== Set make environment variables ======================
-#
+
 # Related file storage path
 make_path="${PWD}"
 tmp_path="${make_path}/tmp"
@@ -261,7 +224,6 @@ download_depends() {
 
     # Download install/update and other related files
     svn export ${script_repo} ${common_files}/rootfs/usr/sbin --force
-    svn export ${common_files}/rootfs/etc --force
     chmod +x ${common_files}/rootfs/usr/sbin/*
 }
 
@@ -426,9 +388,9 @@ replace_kernel() {
     cd ${make_path}
 
     # Replace the kernel
-    build_boot="$(ls ${kernel_path}/${kernel}/boot-${kernel}-*.tar.gz 2>/dev/null | head -n 1)"
-    build_dtb="$(ls ${kernel_path}/${kernel}/dtb-amlogic-${kernel}-*.tar.gz 2>/dev/null | head -n 1)"
-    build_modules="$(ls ${kernel_path}/${kernel}/modules-${kernel}-*.tar.gz 2>/dev/null | head -n 1)"
+    build_boot="$(ls ${kernel_path}/${kernel}/boot-${kernel}*.tar.gz 2>/dev/null | head -n 1)"
+    build_dtb="$(ls ${kernel_path}/${kernel}/dtb-amlogic-${kernel}*.tar.gz 2>/dev/null | head -n 1)"
+    build_modules="$(ls ${kernel_path}/${kernel}/modules-${kernel}*.tar.gz 2>/dev/null | head -n 1)"
     [[ -n "${build_boot}" && -n "${build_dtb}" && -n "${build_modules}" ]] || error_msg "The 3 kernel missing."
 
     # 01. For /boot five files
@@ -490,6 +452,17 @@ refactor_files() {
     echo "BOARD='${board}'" >>${op_release}
     echo "KERNEL_VERSION='${kernel}'" >>${op_release}
     echo "K510='${K510}'" >>${op_release}
+
+    # Add firmware version information to the terminal page
+        #[[ -f "etc/banner" ]] && {
+        #op_version=$(echo $(ls lib/modules/ 2>/dev/null))
+        #op_production_date=$(date +%Y-%m-%d)
+        #echo " Install OpenWrt: System → Amlogic Service → Install OpenWrt" >>etc/banner
+        #echo " Update  OpenWrt: System → Amlogic Service → Online  Update" >>etc/banner
+        #echo " Amlogic Box SoC: ${SOC} | OpenWrt Kernel: ${op_version}" >>etc/banner
+        #echo " Production Date: ${op_production_date}" >>etc/banner
+        #echo "───────────────────────────────────────────────────────────────────────" >>etc/banner }
+   
 
     # Add cpustat
     cpustat_file="${common_files}/patches/cpustat"
