@@ -84,7 +84,7 @@ adjust_settings() {
     wget -P files/etc/ https://raw.githubusercontent.com/kzer00/repo/main/aarch64_cortex-a53/profile && chmod +x /etc/profile
     wget -P files/etc/ https://raw.githubusercontent.com/kzer00/repo/main/aarch64_cortex-a53/shadow
     wget -P files/usr/bin https://raw.githubusercontent.com/kzer00/repo/main/aarch64_cortex-a53/sysinfo && chmod +x /files/usr/bin/sysinfo
-    echo "src/gz custom_repo https://raw.githubusercontent.com/indowrt/indowrt/main/aarch64_cortex-a53" >> repositories.conf
+    echo "src/gz custom https://raw.githubusercontent.com/indowrt/indowrt/main/aarch64_cortex-a53" >> repositories.conf
     sed -i 's/option check_signature/# option check_signature/g' repositories.conf
     echo -e "${STEPS} Start adjusting .config file settings..."
 
@@ -159,7 +159,7 @@ rebuild_firmware() {
         luci-proto-3g luci-proto-ncm  \
         luci-proto-wireguard luci-proto-qmi usb-modeswitch luci-app-ttyd \
         kmod-usb-net-rndis -dnsmasq dnsmasq-full \
-        openssh-sftp-server luci-app-openclash \
+        openssh-sftp-server luci-app-openclash luci-app-internet-detector\
         luci-theme-neobirdkawe xmm-modem luci-app-modeminfo luci-app-atinout-mod \
         ${config_list} \
         "
