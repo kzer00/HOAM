@@ -14,7 +14,7 @@ on:
       branch:
         description: "Select the releases branch"
         required: false
-        default: "22.03.3"
+        default: "23.05.2"
         type: choice
         options:
           - 22.03.3
@@ -68,7 +68,7 @@ on:
       kernel_repo:
         description: "Set the kernel repository"
         required: false
-        default: "https://github.com/cuangky/kernel/tree/main/pub"
+        default: "https://github.com/ophub/kernel/releases/download/kernel_stable/"
       openwrt_size:
         description: "Set the rootfs size(Unit: MiB)"
         required: false
