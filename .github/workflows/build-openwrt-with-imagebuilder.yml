@@ -23,6 +23,15 @@ on:
           - 21.02.5
           - 19.07.10
           - 18.06.9
+       
+      openwrt_model:
+         description: "Select model openwrt"
+         required: false
+         default: ""
+         type: choice
+         options:
+          - armvirt
+          - armsr
       openwrt_board:
         description: "Select Amlogic board"
         required: false
