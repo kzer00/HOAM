@@ -61,7 +61,7 @@ download_imagebuilder() {
 
     # Downloading imagebuilder files
     # Download example: https://downloads.openwrt.org/releases/21.02.3/targets/armvirt/64/openwrt-imagebuilder-21.02.3-armvirt-64.Linux-x86_64.tar.xz
-    download_file="https://downloads.openwrt.org/releases/${rebuild_branch}/targets/armsr/armv8/openwrt-imagebuilder-${rebuild_branch}-armsr-armv8.Linux-x86_64.tar.xz"
+    download_file="https://downloads.openwrt.org/releases/${rebuild_branch}/targets/armvirt/64/openwrt-imagebuilder-${rebuild_branch}-armvirt-64.Linux-x86_64.tar.xz"
     wget -q ${download_file}
     [[ "${?}" -eq "0" ]] || error_msg "Wget download failed: [ ${download_file} ]"
 
@@ -83,7 +83,7 @@ adjust_settings() {
     wget -P files/etc/ https://raw.githubusercontent.com/kzer00/hoam/main/amlogic-s9xxx/common-files/rootfs/etc/banner
     wget -P files/etc/ https://raw.githubusercontent.com/kzer00/repo/main/aarch64_cortex-a53/profile && chmod +x /etc/profile
     wget -P files/etc/ https://raw.githubusercontent.com/kzer00/repo/main/aarch64_cortex-a53/shadow
-    wget -P files/usr/bin https://raw.githubusercontent.com/kzer00/repo/main/aarch64_generic/sysinfo && chmod +x /files/usr/bin/sysinfo
+    wget -P files/usr/bin https://raw.githubusercontent.com/kzer00/repo/main/aarch64_cortex-a53/sysinfo && chmod +x /files/usr/bin/sysinfo
     echo "src/gz custom https://raw.githubusercontent.com/indowrt/indowrt/main/aarch64_cortex-a53" >> repositories.conf
     sed -i 's/option check_signature/# option check_signature/g' repositories.conf
     echo -e "${STEPS} Start adjusting .config file settings..."
@@ -168,7 +168,7 @@ rebuild_firmware() {
     make image PROFILE="Default" PACKAGES="${my_packages}" FILES="files"
 
     sync && sleep 3
-    echo -e "${INFO} [ openwrt/bin/targets/armsr/armv8 ] directory status: $(ls bin/targets/*/* -l 2>/dev/null)"
+    echo -e "${INFO} [ openwrt/bin/targets/armvirt/64 ] directory status: $(ls bin/targets/*/* -l 2>/dev/null)"
     echo -e "${SUCCESS} The rebuild is successful, the current path: [ ${PWD} ]"
 }
 
