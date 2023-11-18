@@ -159,7 +159,7 @@ rebuild_firmware() {
         luci-proto-3g luci-proto-ncm  \
         luci-proto-wireguard luci-proto-qmi usb-modeswitch luci-app-ttyd \
         kmod-usb-net-rndis -dnsmasq dnsmasq-full \
-        openssh-sftp-server luci-app-openclash l\
+        openssh-sftp-server luci-app-openclash \
         luci-theme-neobirdkawe xmm-modem luci-app-modeminfo \
         ${config_list} \
         "
@@ -175,7 +175,7 @@ rebuild_firmware() {
 # Show welcome message
 echo -e "${STEPS} Welcome to Rebuild OpenWrt Using the Image Builder."
 [[ -x "${0}" ]] || error_msg "Please give the script permission to run: [ chmod +x ${0} ]"
-[[ -z "${1}" ]] && error_msg "Please specify the OpenWrt Branch, such as [ ${0} 21.02.3 ]"
+[[ -z "${1}" ]] && error_msg "Please specify the OpenWrt Branch, such as [ ${0} 23.05.2 ]"
 rebuild_branch="${1}"
 echo -e "${INFO} Rebuild path: [ ${PWD} ]"
 echo -e "${INFO} Rebuild branch: [ ${rebuild_branch} ]"
