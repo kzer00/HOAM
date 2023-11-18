@@ -160,7 +160,7 @@ rebuild_firmware() {
         "
 
     # Rebuild firmware
-    make image PROFILE="Default" PACKAGES="${my_packages}" FILES="files"
+    make image PROFILE="generic" PACKAGES="${my_packages}" FILES="files"
 
     sync && sleep 3
     echo -e "${INFO} [ openwrt/bin/targets/armsr/armv8 ] directory status: $(ls bin/targets/*/* -l 2>/dev/null)"
