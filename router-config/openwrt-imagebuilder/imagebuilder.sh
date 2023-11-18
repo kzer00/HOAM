@@ -152,15 +152,15 @@ rebuild_firmware() {
     # Selecting default packages, lib, theme, app and i18n, etc.
     # sorting by https://build.moz.one
     my_packages="\
-    
+        
         kmod-usb-net-rndis -dnsmasq dnsmasq-full \
-        openssh-sftp-server luci-app-openclash \
-        luci-theme-neobirdkawe luci-app-tinyfm "
+        openssh-sftp-server luci-app-openclash luci-app-internet-detector\
+        luci-theme-neobirdkawe xmm-modem luci-app-modeminfo luci-app-atinout-mod \
         ${config_list} \
         "
 
     # Rebuild firmware
-    make image PROFILE="generic" PACKAGES="${my_packages}" FILES="files"
+    make image PROFILE="Default" PACKAGES="${my_packages}" FILES="files"
 
     sync && sleep 3
     echo -e "${INFO} [ openwrt/bin/targets/armsr/armv8 ] directory status: $(ls bin/targets/*/* -l 2>/dev/null)"
@@ -170,7 +170,7 @@ rebuild_firmware() {
 # Show welcome message
 echo -e "${STEPS} Welcome to Rebuild OpenWrt Using the Image Builder."
 [[ -x "${0}" ]] || error_msg "Please give the script permission to run: [ chmod +x ${0} ]"
-[[ -z "${1}" ]] && error_msg "Please specify the OpenWrt Branch, such as [ ${0} 23.05.2 ]"
+[[ -z "${1}" ]] && error_msg "Please specify the OpenWrt Branch, such as [ ${0} 21.02.3 ]"
 rebuild_branch="${1}"
 echo -e "${INFO} Rebuild path: [ ${PWD} ]"
 echo -e "${INFO} Rebuild branch: [ ${rebuild_branch} ]"
