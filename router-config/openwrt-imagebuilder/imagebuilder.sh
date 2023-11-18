@@ -154,8 +154,8 @@ rebuild_firmware() {
     my_packages="\
         
         kmod-usb-net-rndis -dnsmasq dnsmasq-full \
-        openssh-sftp-server luci-app-openclash luci-app-internet-detector\
-        luci-theme-neobirdkawe xmm-modem luci-app-modeminfo luci-app-atinout-mod \
+        openssh-sftp-server luci-app-openclash \
+        luci-theme-material \
         ${config_list} \
         "
 
