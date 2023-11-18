@@ -152,15 +152,15 @@ rebuild_firmware() {
     # Selecting default packages, lib, theme, app and i18n, etc.
     # sorting by https://build.moz.one
     my_packages="\
-        hostapd-common iw iwinfo \
-        kmod-brcmfmac kmod-brcmutil kmod-cfg80211 kmod-mac80211 wpa-cli wpad-basic \
-        luci luci-compat luci-lib-ipkg luci-theme-material \
-        luci-mod-admin-full luci-mod-network luci-mod-status luci-mod-system  \
-        luci-proto-3g luci-proto-ncm  \
-        luci-proto-wireguard luci-proto-qmi usb-modeswitch luci-app-ttyd \
+        -base-files ca-bundle dropbear fstools libc libgcc libustream-mbedtls logd mtd netifd opkg \
+        uci uclient-fetch urandom-seed urngd busybox procd procd-ujail procd-seccomp mkf2fs e2fsprogs blkid \
+        firewall4 nftables kmod-nft-offload odhcp6c odhcpd-ipv6only ppp ppp-mod-pppoe \
+        luci-theme-material kmod-brcmfmac \
+        luci-proto-ncm luci-theme-material usbutils kmod-cfg80211 \
+        luci-proto-qmi usb-modeswitch luci-compat kmod-mac80211 \
         kmod-usb-net-rndis -dnsmasq dnsmasq-full \
         openssh-sftp-server luci-app-openclash \
-        luci-theme-neobirdkawe xmm-modem luci-app-modeminfo \
+        luci-theme-neobirdkawe luci-app-tinyfm "
         ${config_list} \
         "
 
