@@ -24,14 +24,6 @@ on:
           - 19.07.10
           - 18.06.9
        
-      openwrt_model:
-         description: "Select model openwrt"
-         required: false
-         default: ""
-         type: choice
-         options:
-          - armvirt
-          - armsr
       openwrt_board:
         description: "Select Amlogic board"
         required: false
@@ -69,7 +61,7 @@ on:
           - 6.1.4
           - 6.1.5
           - 6.1.7
-          - 6.1.8
+          - 6.1.62
       auto_kernel:
         description: "Auto use the latest kernel"
         required: false
@@ -86,7 +78,7 @@ on:
 
 env:
   TZ: America/New_York
-  IMAGEBUILDER_SH: router-config/openwrt-imagebuilder/imagebuilder.sh
+  IMAGEBUILDER_SH: router-config/openwrt-imagebuilder2/imagebuilder.sh
 
 jobs:
   build:
