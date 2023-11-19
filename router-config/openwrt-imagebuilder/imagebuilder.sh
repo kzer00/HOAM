@@ -152,7 +152,7 @@ rebuild_firmware() {
     # Selecting default packages, lib, theme, app and i18n, etc.
     # sorting by https://build.moz.one
     my_packages="\
-        -firewall4 firewall \
+         \
         hostapd-common iw iwinfo \
         kmod-brcmfmac kmod-brcmutil kmod-cfg80211 kmod-mac80211 wpa-cli wpad-basic \
         luci luci-compat luci-lib-ipkg luci-theme-material \
