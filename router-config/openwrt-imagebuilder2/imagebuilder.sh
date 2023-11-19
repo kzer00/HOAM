@@ -152,7 +152,8 @@ rebuild_firmware() {
     # Selecting default packages, lib, theme, app and i18n, etc.
     # sorting by https://build.moz.one
     my_packages="\
-        
+        luci-app-tinyfm luci-theme-material xmm-modem luci-proto-modemmanager \
+        usbutils usb-modeswitch kmod-usb-net-cdc-ether \
         kmod-usb-net-rndis -dnsmasq dnsmasq-full \
         openssh-sftp-server luci-app-openclash \
         luci-theme-neobirdkawe xmm-modem luci-app-modeminfo \
