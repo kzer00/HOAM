@@ -17,11 +17,12 @@ on:
         default: "23.05.2"
         type: choice
         options:
-          - 23.05.2
+
+          - 22.03.5
           - 22.03.3
           - 21.02.1
           - 21.02.5
-          - 19.07.10
+          - 19.07.1
           - 18.06.9
        
       openwrt_board:
@@ -148,6 +149,6 @@ jobs:
             Default IP: 192.168.1.1
             Default username: root
             Default password: password
-            Default WIFI name: OpenWrt
+            Default WIFI name: OpenWrt-Amlogic
             Default WIFI password: none
-            Install to EMMC: Login to OpenWrt → System → Amlogic Service → Install OpenWrt
+            
